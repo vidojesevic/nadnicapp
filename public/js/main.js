@@ -1,8 +1,18 @@
 $(document).ready(function() {
-    loadView("id","navbar.html")
+    console.log("Hello form jQuery")
+    loadView("#navbar")
+    loadView("#cover")
 })
 
-function loadView(id, views) {
-    const div = $(id)
-    div.html(views)
+function loadView(id) {
+    $.ajax({
+        url: "/views/" + id.replace("#", "") + ".html",
+        type: "GET",
+        success: function(data) {
+            $(id).html(data);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error loading view:", error);
+        }
+    });
 }
