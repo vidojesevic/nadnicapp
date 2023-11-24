@@ -1,5 +1,8 @@
 #cover {
-    background: url("../img/cover.webp");
+    background-image: url("../img/cover.webp");
     width: 100%;
-    height: 30vh;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    height: 45vh;
 }
