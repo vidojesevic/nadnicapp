@@ -3,9 +3,11 @@ import { getUsers } from '../../config/db.js';
 
 const router = new Router();
 
-router.get('/users', async (_, res) => {
+router.get('/users/all', async (_, res) => {
     try {
         const users = await getUsers();
+        // console.log("Users: " + users)
+        res.setHeader('Content-Type', 'application/json');
         res.json(users);
     }
     catch (err) {
