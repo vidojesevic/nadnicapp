@@ -5,6 +5,11 @@ $(document).ready(function() {
     loadView("#filters");
     loadView("#footer");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
+
+    $("#srcForm").on('submit', function() {
+        event.preventDefault();
+        fetchData(getUsersFromAPI("/api/users/area?area=Belgrade", "#users"));
+    })
 })
 
 function loadView(id) {
@@ -22,24 +27,31 @@ function loadView(id) {
     });
 }
 
-function getUsersFromAPI(api, id) {
+function getUsersFromAPI(api, id, area) {
+    let apiUrl;
+    if (!area) {
+        apiUrl = api;
+    } else {
+        apiUrl = api + "?area=" + area
+    }
     $.ajax({
-        url: api,
+        url: apiUrl,
+        // url: `${api}?area=${encodeURIComponent(area)}`,
         type: "GET",
         dataType: 'json',
         success: function(data) {
-            // console.log(JSON.stringify(data));
-            console.log(typeof data)
+            // console.log(typeof data)
+            // console.log(data)
             $(id).empty();
 
             data.forEach(user => {
                 const userHtml = `
-                <div class="user-card border border-1 rounded mb-2">
-                <h3>${user.first_name} ${user.last_name}</h3>
-                <p>Email: ${user.email}</p>
-                <p>Phone: ${user.telefon}</p>
-                <p>Role: ${user.role}</p>
-                <p>Address: ${user.street}, ${user.numbre}, ${user.city} ${user.zip}</p>
+                <div class="user-card border border-1 rounded mb-1">
+                    <h3>${user.first_name} ${user.last_name}</h3>
+                    <p>Email: ${user.email}</p>
+                    <p>Phone: ${user.telefon}</p>
+                    <p>Role: ${user.role}</p>
+                    <p>Address: ${user.street}, ${user.numbre}, ${user.city} ${user.zip}</p>
                 </div>`;
 
                 $(id).append(userHtml);
@@ -62,3 +74,15 @@ async function fetchData(func) {
         console.log(error);
     }
 }
+
+// function searchByArea(input, api) {
+//     const area = $(input).val();
+//
+//     if (!area) {
+//         console.log("Area is not specified");
+//         return;
+//     }
+//
+//     console.log("Area: " + area)
+//     fetchData(() => getUsersFromAPI(api, "#users", area))
+// }
