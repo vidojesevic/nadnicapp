@@ -5,9 +5,13 @@
     background-position-x: center;
     background-position-y: center;
     height: 45vh;
+    padding-bottom: 20em;
 }
 #navbar {
     position: sticky;
     top: 0;
     z-index: 1;
+}
+#jobs {
+    padding-top: 5em!important;
 }

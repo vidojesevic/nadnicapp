@@ -5,25 +5,17 @@ $(document).ready(function() {
     loadView("#filters");
     loadView("#footer");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
+    // dinaClass("#dropp", "list-group-item");
 
-    // searchByArea();
-    $("#srcBtn").click(function(e) {
-        e.preventDefault();
+    searchByArea();
+});
 
-        $.ajax({
-            url: "/api/users/area?area=Belgrade",
-            method: 'get',
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                alert(data)
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        })
-    })
-})
+// testing something
+// function dinaClass(id, clas) {
+//     $(id).click(function() {
+//         $(this).addClass(clas);
+//     })
+// }
 
 function loadView(id) {
     $.ajax({
@@ -66,7 +58,7 @@ function getUsersFromAPI(api, id, area) {
                     <p>Email: ${user.email}</p>
                     <p>Phone: ${user.telefon}</p>
                     <p>Role: ${user.role}</p>
-                    <p>Address: ${user.street}, ${user.numbre}, ${user.city} ${user.zip}</p>
+                    <p>Address: ${user.street} ${user.numbre}, ${user.city} ${user.zip}</p>
                 </div>`;
 
                 $(id).append(userHtml);
@@ -90,18 +82,16 @@ async function fetchData(func) {
     }
 }
 
-// function searchByArea() {
-//     $("button").submit(function(e) {
-//         e.preventDefault();
-//         const area = $("#srcJob").val();
-//         alert(area)
-//         //
-//         // if (!area) {
-//         //     console.log("Area is not specified");
-//         //     return;
-//         // }
-//
-//         console.log("Area: " + area)
-//         fetchData(getUsersFromAPI(api, "#users"))
-//     })
-// }
+function searchByArea() {
+    $(document).on('submit', '#form', function(event){
+        event.preventDefault();
+        const city = $("#srcJob").val();
+        console.log(city)
+        if (city === "") {
+            alert("You have to enter the city!")
+            return;
+        }
+        url = "/api/users/area?area=" + city;
+        fetchData(getUsersFromAPI(url, "#users"));
+    });
+}

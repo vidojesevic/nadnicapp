@@ -1,4 +1,3 @@
-// const express = require('express');
 import express from 'express';
 import * as path from 'path';
 import routes from './src/routes/routes.js'
