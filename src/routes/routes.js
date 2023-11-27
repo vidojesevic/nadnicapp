@@ -6,7 +6,6 @@ const router = new Router();
 router.get('/users/all', async (_, res) => {
     try {
         const users = await getUsers();
-        // console.log("Users: " + users)
         res.setHeader('Content-Type', 'application/json');
         res.json(users);
     }

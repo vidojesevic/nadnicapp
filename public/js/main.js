@@ -4,11 +4,16 @@ $(document).ready(function() {
     loadView("#cover", "");
     loadView("#filters", "");
     loadView("#footer", "");
+    loadView("#about", "");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
     searchByArea();
 
+    $("#loginForm").submit(false);
+    $("#registerForm").submit(false);
     // currently woorking on
     loginRegistrationLoad("#login", "#main");
+    loginRegistrationLoad("#register", "#main");
+    hello();
 });
 
 function loadView(id, target) {
@@ -34,25 +39,23 @@ function loginRegistrationLoad(id, nav) {
     $(document).on("click", id, function(event) {
         event.preventDefault();
         loadView(id, nav)
+        return false;
     });
 }
 
 function getUsersFromAPI(api, id) {
     $.ajax({
         url: api,
-        // url: `${api}?area=${encodeURIComponent(area)}`,
         type: "GET",
         dataType: 'json',
         contentType: false,
         processData: false,
         success: function(data) {
-            // console.log(typeof data)
-            // console.log(data)
             $(id).empty();
 
             data.forEach(user => {
                 const userHtml = `
-                <div class="user-card border border-1 rounded mb-1">
+                <div class="user-card border rounded mb-2">
                     <h3>${user.first_name} ${user.last_name}</h3>
                     <p>Email: ${user.email}</p>
                     <p>Phone: ${user.telefon}</p>
@@ -85,7 +88,6 @@ function searchByArea() {
     $(document).on('submit', '#form', function(event){
         event.preventDefault();
         const city = $("#srcJob").val();
-        console.log(city)
         if (city === "") {
             alert("You have to enter the city!")
             return;

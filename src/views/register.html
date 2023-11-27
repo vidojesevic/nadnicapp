@@ -1,0 +1,65 @@
+<br/>
+<div class="container">
+    <h2 class="text-center fw-bold mb-4">Register</h2>
+    <form id="registerForm" class="text-center row">
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="form-outline mb-2">
+                <input type="email" id="email" autocomplete="email" class="form-control" />
+                <label class="form-label" for="form2Example1">Email address</label>
+            </div>
+            <div class="form-outline mb-2">
+                <input type="username" id="username" autocomplete="username" class="form-control" />
+                <label class="form-label" for="form2Example1">Username</label>
+            </div>
+            <div class="form-outline mb-2">
+                <input type="password" id="pass" autocomplete="new-password" class="form-control" />
+                <label class="form-label" for="form2example2">Password</label>
+            </div>
+            <div class="form-outline mb-2">
+                <input type="password" id="passRep" autocomplete="new-password" class="form-control" />
+                <label class="form-label" for="form2example2">Repeat password</label>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-light border rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pick your role
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Worker</a>
+                    <a class="dropdown-item" href="#">Employer</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+            <div class="form-outline mb-2">
+                <input type="text" id="first_name" autocomplete="name" class="form-control" />
+                <label class="form-label" for="form2Example1">First name</label>
+            </div>
+
+            <div class="form-outline mb-2">
+                <input type="text" id="last_name" autocomplete="name" class="form-control" />
+                <label class="form-label" for="form2Example1">Last name</label>
+            </div>
+
+            <div class="form-outline mb-2">
+                <input type="text" id="street" autocomplete="street-address" class="form-control" />
+                <label class="form-label" for="form2Example1">Street</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-2">
+                <input type="text" id="strNum" autocomplete="cc-number" class="form-control" />
+                <label class="form-label" for="form2example2">Street number</label>
+            </div>
+
+            <div class="form-outline mb-2">
+                <input type="text" id="city" autocomplete="city" class="form-control" />
+                <label class="form-label" for="form2example2">City</label>
+            </div>
+        </div>
+
+        <div class="buttonSub text-center">
+            <button type="button" class="btn btn-success col-3 text-center btn-block mb-4">Sign up</button>
+        </div>
+    </form>
+</div>

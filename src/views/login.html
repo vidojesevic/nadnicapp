@@ -2,19 +2,19 @@
 <div class="container">
     <div class="row">
         <h2 class="text-center fw-bold mb-4">Login</h2>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-12 mb-4">
             <img class="img-fluid rounded" src="img/login.webp" alt="login" />
         </div>
-        <form id="login" class="text-center col-6">
+        <form id="loginForm" class="text-center col-md-12 col-lg-6">
             <!-- Email input -->
             <div class="form-outline mb-4">
-                <input type="email" id="form2Example1" class="form-control" />
+                <input type="email" id="loginMail" autocomplete="email" class="form-control" />
                 <label class="form-label" for="form2Example1">Email address</label>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <input type="password" id="form2Example2" class="form-control" />
+                <input type="password" autocomplete="current-password" id="loginPass" class="form-control" />
                 <label class="form-label" for="form2Example2">Password</label>
             </div>
 
@@ -39,7 +39,7 @@
 
             <!-- Register buttons -->
             <div class="text-center">
-                <p>Not a member? <a class="text-success" href="#!">Register</a></p>
+                <p>Not a member? <a class="text-success" id="register" href="/register">Register</a></p>
                 <p>or sign up with:</p>
                 <button type="button" class="btn btn-link btn-floating mx-1">
                     <i class="fab fa-facebook-f"></i>

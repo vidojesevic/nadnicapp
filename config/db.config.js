@@ -48,15 +48,4 @@ async function createDbConfig() {
 
 const dbConfig = await createDbConfig();
 
-// console.log(dbConfig)
-
-// hardcodovano
-// const dbConfig = {
-//     host: 'localhost',
-//     user: 'bun',
-//     password: '',
-//     port: 3306,
-//     database: 'nadnicappNode'
-// };
-
 export { dbConfig };

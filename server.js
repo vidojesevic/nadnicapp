@@ -18,6 +18,10 @@ app.get('/login', (_, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
+app.get('/register', (_, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'register.html'));
+});
+
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
