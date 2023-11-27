@@ -6,9 +6,22 @@ $(document).ready(function() {
     loadView("#footer");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
 
-    $("#srcForm").on('submit', function() {
-        event.preventDefault();
-        fetchData(getUsersFromAPI("/api/users/area?area=Belgrade", "#users"));
+    // searchByArea();
+    $("#srcBtn").click(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "/api/users/area?area=Belgrade",
+            method: 'get',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                alert(data)
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
     })
 })
 
@@ -39,6 +52,8 @@ function getUsersFromAPI(api, id, area) {
         // url: `${api}?area=${encodeURIComponent(area)}`,
         type: "GET",
         dataType: 'json',
+        contentType: false,
+        processData: false,
         success: function(data) {
             // console.log(typeof data)
             // console.log(data)
@@ -75,14 +90,18 @@ async function fetchData(func) {
     }
 }
 
-// function searchByArea(input, api) {
-//     const area = $(input).val();
+// function searchByArea() {
+//     $("button").submit(function(e) {
+//         e.preventDefault();
+//         const area = $("#srcJob").val();
+//         alert(area)
+//         //
+//         // if (!area) {
+//         //     console.log("Area is not specified");
+//         //     return;
+//         // }
 //
-//     if (!area) {
-//         console.log("Area is not specified");
-//         return;
-//     }
-//
-//     console.log("Area: " + area)
-//     fetchData(() => getUsersFromAPI(api, "#users", area))
+//         console.log("Area: " + area)
+//         fetchData(getUsersFromAPI(api, "#users"))
+//     })
 // }

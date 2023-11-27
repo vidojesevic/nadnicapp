@@ -6,3 +6,8 @@
     background-position-y: center;
     height: 45vh;
 }
+#navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}

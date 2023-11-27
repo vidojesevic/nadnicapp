@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fw-bold">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fw-bold sticky">
     <div class="container-fluid">
         <a class="navbar-brand text-success" href="#">Nadnicapp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,9 +16,9 @@
                     <a class="nav-link" href="/login">Login</a>
                 </li>
             </ul>
-            <form id="srcForm" class="d-flex" action="">
-                <input name="area" id="srcJob" class="form-control me-2" type="text" placeholder="Search jobs in your area" aria-label="Search">
-                <button class="btn btn-outline-success" id="srcBtn" type="button">Search</button>
+            <form id="srcForm" class="d-flex" action="/api/users/area">
+                <input name="area" id="srcJob" class="form-control me-2" type="search" placeholder="Search jobs in your area" aria-label="Search">
+                <input type="submit" class="btn btn-outline-success" id="srcBtn" value="Search"/>
             </form>
         </div>
     </div>
