@@ -1,6 +1,8 @@
 import mariadb from 'mariadb';
 import { dbConfig } from './db.config.js';
 
+console.log(dbConfig);
+
 const pool = mariadb.createPool(dbConfig);
 
 export const getUsers = async () => {
@@ -15,6 +17,7 @@ export const getUsers = async () => {
 
         return rows;
     } catch (err) {
+        console.error('Error in getUsers:', err);
         throw err;
     } finally {
         if (conn) {
@@ -34,6 +37,7 @@ export const getUsersByArea = async (area) => {
 
         return rows;
     } catch (err) {
+        console.error('Error in getUsersByArea:', err);
         throw err;
     } finally {
         if (conn) {

@@ -1,18 +1,62 @@
-// require('dotenv').config();
-import dotenv from 'dotenv';
-dotenv.config();
+import {promises as fs} from "node:fs";
 
-const dbConfig = {
-    // host: process.env.DB_HOST,
-    // user: process.env.DB_USER,
-    // password: process.env.DB_PASSWORD,
-    // database: process.env.DB_DATABASE,
-    // port: process.env.DB_PORT,
-    host: 'localhost',
-    user: 'bun',
-    password: '',
-    port: 3306,
-    database: 'nadnicappNode'
-};
+async function getDotEnvData(data) {
+    try {
+        const content = await fs.readFile('.env', 'utf8');
+        data = data + "="
+
+        const line = content.split('\n');
+        let result = '';
+
+        line.forEach((val) => {
+            if (val === (data)) {
+                return result;
+            }
+            if (val.includes(data)) {
+                result = val.replace(data, "").trim();
+            }
+        });
+
+        return result;
+    }
+    catch (err) {
+        console.log(err)
+        throw err;
+    }
+}
+
+async function createDbConfig() {
+    try {
+        const hostPromise = getDotEnvData("DB_HOST");
+        const userPromise = getDotEnvData("DB_USER");
+        const passwordPromise = getDotEnvData("DB_PASS");
+        const databasePromise = getDotEnvData("DB_NAME");
+        const port = 3306;
+        const connectionLimit = 10;
+
+        const [host, user, password, database] = await Promise.all([
+            hostPromise, userPromise, passwordPromise, databasePromise
+        ]);
+
+        return { host, user, password, port, database, connectionLimit};
+    }
+    catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+const dbConfig = await createDbConfig();
+
+// console.log(dbConfig)
+
+// hardcodovano
+// const dbConfig = {
+//     host: 'localhost',
+//     user: 'bun',
+//     password: '',
+//     port: 3306,
+//     database: 'nadnicappNode'
+// };
 
 export { dbConfig };

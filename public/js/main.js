@@ -1,9 +1,9 @@
 $(document).ready(function() {
     console.log("jQuery");
-    loadView("#navbar");
-    loadView("#cover");
-    loadView("#filters");
-    loadView("#footer");
+    loadView("#navbar", "");
+    loadView("#cover", "");
+    loadView("#filters", "");
+    loadView("#footer", "");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
     searchByArea();
 
@@ -11,12 +11,16 @@ $(document).ready(function() {
     loginRegistrationLoad("#login", "#main");
 });
 
-function loadView(id) {
+function loadView(id, target) {
+    if (target === "") {
+        target = id
+    }
     $.ajax({
         url: "/views/" + id.replace("#", "") + ".html",
         type: "GET",
         success: function(data) {
-            $(id).html(data);
+            $(target).empty();
+            $(target).html(data);
         },
         error: function(xhr, status, error) {
             console.log(xhr)
@@ -29,19 +33,7 @@ function loadView(id) {
 function loginRegistrationLoad(id, nav) {
     $(document).on("click", id, function(event) {
         event.preventDefault();
-        $.ajax({
-            url: "/views/" + id.replace("#", "") + ".html",
-            type: "GET",
-            success: function(data) {
-                $(nav).empty();
-                $(nav).html(data);
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr)
-                console.log(status)
-                console.error("Error loading view:", error);
-            }
-        });
+        loadView(id, nav)
     });
 }
 
