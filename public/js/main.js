@@ -5,17 +5,11 @@ $(document).ready(function() {
     loadView("#filters");
     loadView("#footer");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
-    // dinaClass("#dropp", "list-group-item");
-
     searchByArea();
-});
 
-// testing something
-// function dinaClass(id, clas) {
-//     $(id).click(function() {
-//         $(this).addClass(clas);
-//     })
-// }
+    // currently woorking on
+    loginRegistrationLoad("#login", "#main");
+});
 
 function loadView(id) {
     $.ajax({
@@ -32,15 +26,28 @@ function loadView(id) {
     });
 }
 
-function getUsersFromAPI(api, id, area) {
-    let apiUrl;
-    if (!area) {
-        apiUrl = api;
-    } else {
-        apiUrl = api + "?area=" + area
-    }
+function loginRegistrationLoad(id, nav) {
+    $(document).on("click", id, function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/views/" + id.replace("#", "") + ".html",
+            type: "GET",
+            success: function(data) {
+                $(nav).empty();
+                $(nav).html(data);
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr)
+                console.log(status)
+                console.error("Error loading view:", error);
+            }
+        });
+    });
+}
+
+function getUsersFromAPI(api, id) {
     $.ajax({
-        url: apiUrl,
+        url: api,
         // url: `${api}?area=${encodeURIComponent(area)}`,
         type: "GET",
         dataType: 'json',

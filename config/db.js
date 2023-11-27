@@ -11,7 +11,7 @@ export const getUsers = async () => {
                                 u.email, u.telefon, r.role, l.street, l.numbre, 
                                 l.zip, l.city FROM users AS u JOIN role AS r ON 
                                 u.role_id=r.id_role JOIN location AS l 
-                                ON u.location_id=l.id_location`);
+                                ON u.location_id=l.id_location ORDER BY u.created DESC`);
 
         return rows;
     } catch (err) {
