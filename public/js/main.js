@@ -1,12 +1,16 @@
 $(document).ready(function() {
     console.log("jQuery");
+    // loading views
     loadView("#navbar", "");
     loadView("#cover", "");
     loadView("#filters", "");
     loadView("#footer", "");
     loadView("#about", "");
+    // ajax calls and swaping content from div
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
     searchByArea();
+
+    // basic UI
     activeNav();
     setTimeout(function() {
         clearInterval(stickiFooter);
@@ -21,6 +25,11 @@ $(document).ready(function() {
     // getLoginData();
 });
 
+/**
+ * Loading views
+ * @param {string} id - String value of id
+ * @param {string} target - String value of target id for swapping content
+ */
 function loadView(id, target) {
     if (target === "") {
         target = id
@@ -124,7 +133,17 @@ const stickiFooter = setInterval(function() {
 
 const activeNav = () => {
     $(document).on('click', "#navbar-js li a", function () {
-        $(this).parent().siblings().find('a').removeClass('activateNav');
-        $(this).addClass('activateNav');
+        const body = $(document).width();
+        if (body > 992) {
+            setTimeout(() => {
+                $(this).parent().siblings().find('a').removeClass('activateNav text-dark');
+                $(this).addClass('activateNav text-dark');
+            }, 230);
+        } else {
+            setTimeout(() => {
+                $(this).parent().siblings().find('a').removeClass('text-dark');
+                $(this).addClass('text-dark');
+            }, 230);
+        }
     });
 };

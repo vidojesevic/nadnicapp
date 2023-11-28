@@ -44,3 +44,40 @@ export const getUsersByArea = async (area) => {
         }
     }
 };
+
+export const createLocation = async (street, numbre, city) => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const query = `INSERT INTO location (street, numbre, city, zip) values (?,?,?,?,?,?)`;
+        const rows = await conn.query(query, [street, numbre, city]);
+
+        return rows;
+    } catch (err) {
+        console.error('Error in getUsersByArea:', err);
+        throw err;
+    } finally {
+        if (conn) {
+            conn.release();
+        }
+    }
+}
+
+export const createUser = async (data) => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const query = `INSERT INTO users (first_name, last_name, email, telefon,
+                        role_id, username) values (?,?,?,?,?,?)`;
+        const rows = await conn.query(query, [data]);
+
+        return rows;
+    } catch (err) {
+        console.error('Error in getUsersByArea:', err);
+        throw err;
+    } finally {
+        if (conn) {
+            conn.release();
+        }
+    }
+};
