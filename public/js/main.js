@@ -8,12 +8,15 @@ $(document).ready(function() {
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
     searchByArea();
 
-    $("#loginForm").submit(false);
-    $("#registerForm").submit(false);
-    // currently woorking on
+    // $("#loginForm").submit(false);
+    // $("#registerForm").submit(false);
+
     loginRegistrationLoad("#login", "#main");
     loginRegistrationLoad("#register", "#main");
-    hello();
+
+    //login.js
+    getRegistrationData();
+    // getLoginData();
 });
 
 function loadView(id, target) {
@@ -56,7 +59,7 @@ function getUsersFromAPI(api, id) {
             data.forEach(user => {
                 const userHtml = `
                 <div class="user-card border rounded mb-2">
-                    <h3>${user.first_name} ${user.last_name}</h3>
+                    <h3>${user.first_name} ${user.last_name} (${user.username})</h3>
                     <p>Email: ${user.email}</p>
                     <p>Phone: ${user.telefon}</p>
                     <p>Role: ${user.role}</p>
