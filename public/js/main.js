@@ -7,14 +7,16 @@ $(document).ready(function() {
     loadView("#about", "");
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
     searchByArea();
+    activeNav();
+    setTimeout(function() {
+        clearInterval(stickiFooter);
+    }, 500);
 
-    // $("#loginForm").submit(false);
-    // $("#registerForm").submit(false);
-
+    // login and registration
     loginRegistrationLoad("#login", "#main");
     loginRegistrationLoad("#register", "#main");
 
-    //login.js
+    //login.js functions
     getRegistrationData();
     // getLoginData();
 });
@@ -55,11 +57,15 @@ function getUsersFromAPI(api, id) {
         processData: false,
         success: function(data) {
             $(id).empty();
+            if (data.length === 0) {
+                const city = $("#srcJob").val()
+                $(id).append(`<h3>There is no data for ${city}!</h3>`);
+            }
 
             data.forEach(user => {
                 const userHtml = `
                 <div class="user-card border rounded mb-2">
-                    <h3>${user.first_name} ${user.last_name} (${user.username})</h3>
+                    <h3>${user.first_name} ${user.last_name} - @${user.username}</h3>
                     <p>Email: ${user.email}</p>
                     <p>Phone: ${user.telefon}</p>
                     <p>Role: ${user.role}</p>
@@ -91,11 +97,34 @@ function searchByArea() {
     $(document).on('submit', '#form', function(event){
         event.preventDefault();
         const city = $("#srcJob").val();
+        const regex = /^[a-zA-Z]+$/;
         if (city === "") {
             alert("You have to enter the city!")
+            return;
+        }
+        if (!regex.test(city)) {
+            alert("You have to enter letters only!")
             return;
         }
         url = "/api/users/area?area=" + city;
         fetchData(getUsersFromAPI(url, "#users"));
     });
 }
+
+const stickiFooter = setInterval(function() {
+    const height = $('body').height();
+    const win = $(window).height();
+    const footer = $('#footer');
+    if (win > height) {
+        footer.css('position','fixed','bottom','0');
+    } else {
+        footer.css('position','static');
+    }
+}, 50);
+
+const activeNav = () => {
+    $(document).on('click', "#navbar-js li a", function () {
+        $(this).parent().siblings().find('a').removeClass('activateNav');
+        $(this).addClass('activateNav');
+    });
+};

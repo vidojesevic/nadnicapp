@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fw-bold sticky">
     <div class="container-fluid">
-        <a class="navbar-brand text-success" href="#">Nadnicapp</a>
+        <a class="navbar-brand text-success" href="index.html">Nadnicapp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbar-js">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a> <!-- aria-current="page" -->
                 </li>
@@ -13,14 +13,14 @@
                     <a class="nav-link" href="#main">Jobs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="login" href="#">Login</a>
                 </li>
             </ul>
             <form id="form" class="d-flex" action="">
-                <input name="area" id="srcJob" class="form-control me-2" type="search" placeholder="Search jobs in your area" aria-label="Search">
+                <input name="area" autocomplete="home city" patern="[a-zA-Z]" id="srcJob" class="form-control me-2" type="search" placeholder="Search jobs in your area" aria-label="Search">
                 <input type="submit" id="srcBtn" class="btn btn-outline-success" value="Search"/>
             </form>
         </div>

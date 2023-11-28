@@ -1,65 +1,68 @@
 <br/>
 <div class="container">
-    <h2 class="text-center fw-bold mb-4">Register</h2>
+    <h2 class="text-center fw-bold mb-2">Register</h2>
     <form id="registerForm" class="text-center row">
         <div class="col-lg-6 col-md-12 mb-4">
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example1">Email address</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="email">Email address</label>
                 <input type="email" id="email" autocomplete="email" class="form-control" />
             </div>
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example1">Username</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="username">Username</label>
                 <input type="username" id="username" autocomplete="username" class="form-control" />
             </div>
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2example2">Password</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="pass">Password</label>
                 <input type="password" id="pass" autocomplete="new-password" class="form-control" />
             </div>
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2example2">Repeat password</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="passRep">Repeat password</label>
                 <input type="password" id="passRep" autocomplete="new-password" class="form-control" />
             </div>
-            <div class="dropdown">
-                <button class="btn btn-light border rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Pick your role
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Worker</a>
-                    <a class="dropdown-item" href="#">Employer</a>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="role">Choose role</label>
+                <div class="dropdown" id="role">
+                    <button class="btn btn-light border rounded dropdown-toggle" type="button" id="roleButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pick your role
+                    </button>
+                    <div class="dropdown-menu" id="roleDrop" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" data-value="Worker">Worker</a>
+                        <a class="dropdown-item" href="#" data-value="Employer">Employer</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-6 col-md-12">
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example1">First name</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="first_name">First name</label>
                 <input type="text" id="first_name" autocomplete="name" class="form-control" />
             </div>
 
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example1">Last name</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="last_name">Last name</label>
                 <input type="text" id="last_name" autocomplete="name" class="form-control" />
             </div>
 
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2Example1">Street</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="street">Street</label>
                 <input type="text" id="street" autocomplete="street-address" class="form-control" />
             </div>
 
             <!-- Password input -->
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2example2">Street number</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="strNum">Street number</label>
                 <input type="text" id="strNum" autocomplete="cc-number" class="form-control" />
             </div>
 
-            <div class="form-outline mb-2">
-                <label class="form-label" for="form2example2">City</label>
+            <div class="form-outline mb-3">
+                <label class="form-label" for="city">City</label>
                 <input type="text" id="city" autocomplete="city" class="form-control" />
             </div>
         </div>
 
-        <div class="buttonSub text-center">
-            <input type="submit" class="btn btn-success col-3 text-center btn-block mb-4" value="Sign up"/>
+        <div class="buttonSub text-center mt-2">
+            <input type="submit" class="btn btn-success col-3 text-center btn-block mb-3" value="Sign up"/>
         </div>
     </form>
 </div>
