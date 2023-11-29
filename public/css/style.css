@@ -32,3 +32,9 @@ html {
     border-radius: 50%;
     margin: 0 -3px -3px 0;
 }
+.user-card:hover {
+    /* box-shadow: -12px -8px 40px rgba(70,70,70,0.12) inset; */
+    /* box-shadow: -65px 87px 70px -106px rgba(25,135,84,1) inset;  //cool*/
+    box-shadow: -68px 58px 154px -188px rgba(25,135,84,1) inset;
+    border-radius: 23%;
+}

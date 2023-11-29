@@ -10,7 +10,7 @@
                     <a class="nav-link" href="#">Home</a> <!-- aria-current="page" -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#main">Jobs</a>
+                    <a class="nav-link" id="jobsNav" href="#main">Jobs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -20,7 +20,7 @@
                 </li>
             </ul>
             <form id="form" class="d-flex" action="">
-                <input name="area" autocomplete="home city" patern="[a-zA-Z]" id="srcJob" class="form-control me-2" type="search" placeholder="Search jobs in your area" aria-label="Search">
+                <input name="area" patern="[a-zA-Z]" id="srcJob" class="form-control me-2" type="search" placeholder="Search jobs in your area" aria-label="Search">
                 <input type="submit" id="srcBtn" class="btn btn-outline-success" value="Search"/>
             </form>
         </div>

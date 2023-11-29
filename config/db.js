@@ -45,12 +45,12 @@ export const getUsersByArea = async (area) => {
     }
 };
 
-export const createLocation = async (street, numbre, city) => {
+export const createLocation = async (street, numbre, city, zip) => {
     let conn;
     try {
         conn = await pool.getConnection();
-        const query = `INSERT INTO location (street, numbre, city, zip) values (?,?,?,?,?,?)`;
-        const rows = await conn.query(query, [street, numbre, city]);
+        const query = `INSERT INTO location (street, numbre, city, zip) values (?,?,?,?)`;
+        const rows = await conn.query(query, [street, numbre, city, zip]);
 
         return rows;
     } catch (err) {

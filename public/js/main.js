@@ -1,3 +1,6 @@
+import { getRegistrationData } from "./registration.js";
+import { getLoginData } from "./login.js";
+
 $(document).ready(function() {
     console.log("jQuery");
     // loading views
@@ -15,6 +18,7 @@ $(document).ready(function() {
     setTimeout(function() {
         clearInterval(stickiFooter);
     }, 500);
+    loginVsRegistrationUI();
 
     // login and registration
     loginRegistrationLoad("#login", "#main");
@@ -22,7 +26,7 @@ $(document).ready(function() {
 
     //login.js functions
     getRegistrationData();
-    // getLoginData();
+    getLoginData();
 });
 
 /**
@@ -73,7 +77,7 @@ function getUsersFromAPI(api, id) {
 
             data.forEach(user => {
                 const userHtml = `
-                <div class="user-card border rounded mb-2">
+                <div class="user-card border rounded rounded-2 mb-2">
                     <h3>${user.first_name} ${user.last_name} - @${user.username}</h3>
                     <p>Email: ${user.email}</p>
                     <p>Phone: ${user.telefon}</p>
@@ -120,6 +124,7 @@ function searchByArea() {
     });
 }
 
+// UI functions
 const stickiFooter = setInterval(function() {
     const height = $('body').height();
     const win = $(window).height();
@@ -147,3 +152,13 @@ const activeNav = () => {
         }
     });
 };
+
+function loginVsRegistrationUI() {
+    $(document).on('click', 'a#register', function() {
+        $("#login").empty().html('Registration');
+        // $("#jobsNav").attr('href', "index.html#main");  // cool idea, bad execution
+    })
+    $(document).on('click', "#navbar-js li a", function() {
+        $("#login").empty().html('Login');
+    })
+}
