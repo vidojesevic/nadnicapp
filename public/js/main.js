@@ -24,7 +24,7 @@ $(document).ready(function() {
     loginRegistrationLoad("#login", "#main");
     loginRegistrationLoad("#register", "#main");
 
-    //login.js functions
+    // login.js && registration.js
     getRegistrationData();
     getLoginData();
 });
@@ -33,6 +33,7 @@ $(document).ready(function() {
  * Loading views
  * @param {string} id - String value of id
  * @param {string} target - String value of target id for swapping content
+ * @return {void}
  */
 function loadView(id, target) {
     if (target === "") {

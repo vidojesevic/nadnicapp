@@ -2,6 +2,7 @@ import express from 'express';
 import * as path from 'path';
 import routes from './src/routes/routes.js';
 import multer from 'multer';
+import bodyParser from 'body-parser';
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,9 @@ app.use(express.static('public'));
 app.use(express.static('src'));
 
 app.use(upload.array());
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
+
 app.use('/api', routes);
 
 app.get('/', (_req, res) => {

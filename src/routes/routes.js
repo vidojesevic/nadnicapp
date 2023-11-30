@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { createLocation, getUsers, getUsersByArea } from '../../config/db.js';
+import { createLocation, getUsers, getUsersByArea, getLastLocation } from '../../config/db.js';
 
 const router = new Router();
 
-router.get('/users/all', async (_, res) => {
+router.get('/users/all', async (_req, res) => {
     try {
         const users = await getUsers();
         res.setHeader('Content-Type', 'application/json');
@@ -29,11 +29,23 @@ router.get('/users/area', async (req, res) => {
     }
 });
 
+router.get('/location/last', async (_req, res) => {
+    try {
+        const id = await getLastLocation();
+        res.setHeader('Content-Type', 'application/json');
+        res.json(id);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 router.post('/users/createUser', async (req, res) => {
-    const user = req.query.user;
+    const { first_name, last_name, email, telefon, username, role_id } = req.body;
 
     try {
-        const userCr = await createUser(user);
+        const userCr = await createUser(first_name, last_name, email, telefon, username, role_id);
         res.setHeader('Content-Type', 'application/json');
         res.json(userCr);
     }

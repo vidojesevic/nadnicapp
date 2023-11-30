@@ -28,13 +28,14 @@ html {
 }
 .activateNav {
     border-right: 3px solid #5cb85c;
-    border-bottom: 3px solid #5cb85c;
+    /* border-bottom: 3px solid #5cb85c; */
     border-radius: 50%;
-    margin: 0 -3px -3px 0;
+    margin-right: -3px;
+    /* margin-top: 3px; */
 }
 .user-card:hover {
     /* box-shadow: -12px -8px 40px rgba(70,70,70,0.12) inset; */
     /* box-shadow: -65px 87px 70px -106px rgba(25,135,84,1) inset;  //cool*/
-    box-shadow: -68px 58px 154px -188px rgba(25,135,84,1) inset;
+    box-shadow: -96px 49px 190px -185px rgba(25,135,84,1) inset, -16px 166px 106px -216px rgba(25,135,84,1) inset;
     border-radius: 23%;
 }
