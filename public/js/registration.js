@@ -1,4 +1,31 @@
 /**
+ * sendData - Ajax function for senmding data to server
+ * @param {FormData} data - FormData from registration form
+ * @param {string} url - String value of API endpoint url
+ * @return {void}
+ */
+function sendData(formData, url) {
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: formData,
+        dataType: 'json',
+        contentType: false,
+        // contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        processData: false,
+        success:  function(data) {
+            console.log(data)
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("AJAX Error: " + textStatus);
+            console.log("Error Thrown: " + errorThrown);
+            console.log("Server Response: ", jqXHR.responseText);
+            reject(errorThrown);
+        }
+    });
+}
+
+/**
  * getRegistrationData - Function responsiblke for getting and validating data on front end while login
  * @return {void}
  */
@@ -125,15 +152,26 @@ export function getRegistrationData() {
 
             sendData(location, '/api/location/create')
 
-            getLastId('/api/location/last')
-                .then(location_id => {
-                    console.log(location_id);
-                    user.append('location_id', location_id);
-                    // insert into users
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            try {
+                const location_id = getLastId('/api/location/last');
+                alert("See yal tommotor!\nlocation_id: "+location_id);
+            }
+            catch (err) {
+                console.log(err);
+                return;
+            }
+            // TODO: get location_id of last inserted lotaion
+            // getLastId('/api/location/last')
+            //     .then(location_id => {
+            //         console.log(location_id);
+            //         user.append('location_id', location_id);
+            //         // insert into users
+            //     })
+            //     .catch(error => {
+            //         console.log(error);
+            //     });
+
+            // sendData(user, '/api/users/createUser');
 
         }
     })
@@ -162,20 +200,15 @@ function success(div) {
 }
 
 /**
- * sendData - Ajax function for senmding data to server
- * @param {FormData} data - FormData from registration form
- * @param {string} url - String value of API endpoint url
+ * getLastId - Ajax async function that returns last inserted location id
+ * @param {string} url - String value of API endpoint
  * @return {void}
  */
-function sendData(formData, url) {
+function getLastId(url) {
     $.ajax({
         url: url,
-        method: 'POST',
-        data: formData,
+        method: 'GET',
         dataType: 'json',
-        contentType: false,
-        // contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        processData: false,
         success: function(data) {
             console.log(data);
         },
@@ -184,30 +217,5 @@ function sendData(formData, url) {
             console.log("Error Thrown: " + errorThrown);
             console.log("Server Response: ", jqXHR.responseText);
         }
-    });
-}
-
-/**
- * getLastId - Ajax async function that returns last inserted location id
- * @param {string} url - String value of API endpoint
- * @return {void}
- */
-function getLastId(url) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: url,
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                resolve(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("AJAX Error: " + textStatus);
-                console.log("Error Thrown: " + errorThrown);
-                console.log("Server Response: ", jqXHR.responseText);
-                reject(errorThrown);
-            }
-        });
     });
 }

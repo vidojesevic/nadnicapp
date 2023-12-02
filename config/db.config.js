@@ -1,6 +1,6 @@
 import {promises as fs} from "node:fs";
 
-async function getDotEnvData(data) {
+export async function getDotEnvData(data) {
     try {
         const content = await fs.readFile('.env', 'utf8');
         data = data + "="
