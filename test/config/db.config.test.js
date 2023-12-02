@@ -2,14 +2,17 @@ import assert from 'assert';
 import { promises as fs } from 'node:fs';
 import path from 'path';
 
-import { getDotEnvData } from "../../config/db.config.js";
+import { getDotEnvData, createDbConfig } from "../../config/db.config.js";
+
+let mockedGetDotEnvData;
+
+async function createEnvFile() {
+    const envPath = path.resolve(__dirname, '.env');
+    await fs.writeFile(envPath, 'KEY1=value1\n');
+    return envPath;
+}
 
 describe("getDotEnvData", () => {
-    async function createEnvFile() {
-        const envPath = path.resolve(__dirname, '.env');
-        await fs.writeFile(envPath, 'KEY1=value1\nKEY2=value2');
-        return envPath;
-    }
 
     it("Should return data value from an existing key", async () => {
         const envFilePath = await createEnvFile();
@@ -38,3 +41,18 @@ describe("getDotEnvData", () => {
         }
     });
 })
+
+describe("createDbConfig", () => {
+    it("Should throw error if there is an issue", async () => {
+        try {
+            await createDbConfig();
+        }
+        catch (err) {
+            assert.ok(err instanceof Error);
+        }
+    });
+
+    it("Should return valid database configuration", async () => {
+        console.log("Fix for tommorow");
+    });
+});

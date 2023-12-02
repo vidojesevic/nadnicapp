@@ -25,7 +25,7 @@ export async function getDotEnvData(data) {
     }
 }
 
-async function createDbConfig() {
+export async function createDbConfig() {
     try {
         const hostPromise = getDotEnvData("DB_HOST");
         const userPromise = getDotEnvData("DB_USER");
