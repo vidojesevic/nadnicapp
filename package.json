@@ -10,7 +10,7 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "test": "mocha test/**/*.test.js",
+        "test": "bun test",
         "start": "bun server.js"
     },
     "keywords": [],
