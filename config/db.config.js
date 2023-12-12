@@ -9,9 +9,6 @@ export async function getDotEnvData(data) {
         let result = '';
 
         line.forEach((val) => {
-            if (val === (data)) {
-                return result;
-            }
             if (val.includes(data)) {
                 result = val.replace(data, "").trim();
             }

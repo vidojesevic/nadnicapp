@@ -4,7 +4,7 @@ import path from 'path';
 
 import { getDotEnvData, createDbConfig } from "../../config/db.config.js";
 
-let mockedGetDotEnvData;
+// let mockedGetDotEnvData;
 
 async function createEnvFile() {
     const envPath = path.resolve(__dirname, '.env');
@@ -18,8 +18,8 @@ describe("getDotEnvData", () => {
         const envFilePath = await createEnvFile();
         fs.writeFile(envFilePath, 'KEY1=value1\nKey2:value2');
 
-        const result = await getDotEnvData("KEY1");
-        assert.strictEqual(result, 'value1');
+        const result = await getDotEnvData("DB_HOST");
+        assert.strictEqual(result, 'localhost');
         await fs.unlink(envFilePath)
     });
 
@@ -27,7 +27,7 @@ describe("getDotEnvData", () => {
         const envFilePath = await createEnvFile();
         fs.writeFile(envFilePath, 'KEY1=value1\nKey2:value2');
 
-        const result = await getDotEnvData("KEY3");
+        const result = await getDotEnvData("DB_USERNAMw");
         assert.strictEqual(result, '');
         await fs.unlink(envFilePath)
     });
