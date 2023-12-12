@@ -21,6 +21,7 @@ router.get('/users/area', async (req, res) => {
     try {
         const users = await getUsersByArea(area);
         res.setHeader('Content-Type', 'application/json');
+        // console.log(users)
         res.json(users);
     }
     catch (err) {

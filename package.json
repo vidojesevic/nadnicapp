@@ -10,12 +10,13 @@
     "description": "",
     "main": "server.js",
     "scripts": {
+        "clean": "rm -rf dist && echo 'Done.'",
         "test": "bun test",
         "start": "bun server.js"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Vidoje Šević",
+    "license": "MIT",
     "devDependencies": {
         "mocha": "^10.2.0"
     }

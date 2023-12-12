@@ -1,4 +1,4 @@
-import {promises as fs} from "node:fs";
+import { promises as fs } from "node:fs";
 
 export async function getDotEnvData(data) {
     try {
@@ -28,7 +28,7 @@ export async function createDbConfig() {
         const userPromise = getDotEnvData("DB_USER");
         const passwordPromise = getDotEnvData("DB_PASS");
         const databasePromise = getDotEnvData("DB_NAME");
-        const port = 3306;
+        const port = 3307;
         const connectionLimit = 10;
 
         const [host, user, password, database] = await Promise.all([

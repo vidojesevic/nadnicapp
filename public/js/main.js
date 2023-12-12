@@ -111,7 +111,7 @@ function searchByArea() {
     $(document).on('submit', '#form', function(event){
         event.preventDefault();
         const city = $("#srcJob").val();
-        const regex = /^[a-zA-Z]+$/;
+        const regex = /^[ a-zA-Z]+$/;
         if (city === "") {
             alert("You have to enter the city!")
             return;

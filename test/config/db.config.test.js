@@ -53,6 +53,7 @@ describe("createDbConfig", () => {
     });
 
     it("Should return valid database configuration", async () => {
-        console.log("Fix for tommorow");
+        const dbConfig = await createDbConfig()
+        console.log("Opa sine")
     });
 });
