@@ -37,7 +37,7 @@ $(document).ready(function() {
  * @param {string} target - String value of target id for swapping content
  * @return {void}
  */
-function loadView(id, target) {
+const loadView = (id, target) => {
     if (target === "") {
         target = id
     }
@@ -56,7 +56,7 @@ function loadView(id, target) {
     });
 }
 
-function loginRegistrationLoad(id, nav) {
+const loginRegistrationLoad = (id, nav) => {
     $(document).on("click", id, function(event) {
         event.preventDefault();
         loadView(id, nav)
@@ -64,7 +64,7 @@ function loginRegistrationLoad(id, nav) {
     });
 }
 
-function getUsersFromAPI(api, id) {
+const getUsersFromAPI = (api, id) => {
     $.ajax({
         url: api,
         type: "GET",
@@ -100,7 +100,7 @@ function getUsersFromAPI(api, id) {
     });
 }
 
-function getJobsFromAPI(api, id) {
+const getJobsFromAPI = (api, id) => {
     $.ajax({
         url: api,
         type: "GET",
@@ -154,7 +154,7 @@ function getJobsFromAPI(api, id) {
     });
 }
 
-async function fetchData(func) {
+ const fetchData = async (func) => {
     try {
         await func;
     }
@@ -163,7 +163,7 @@ async function fetchData(func) {
     }
 }
 
-function searchByArea() {
+const searchByArea = () => {
     $(document).on('submit', '#form', function(event){
         event.preventDefault();
         const city = $("#srcJob").val();
@@ -270,7 +270,7 @@ const activeNav = () => {
     });
 };
 
-function loginVsRegistrationUI() {
+const loginVsRegistrationUI = () => {
     $(document).on('click', 'a#register', function() {
         $("#login").empty().html('Registration');
         // $("#jobsNav").attr('href', "index.html#main");  // cool idea, bad execution
