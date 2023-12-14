@@ -24,6 +24,50 @@ export const getUsers = async () => {
     }
 };
 
+export const getJobsAll = async () => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const rows = await conn.query(`SELECT j.caption, j.description, j.price, j.date_start, 
+                        j.date_end, j.time_start, j.time_end, l.street, l.numbre, 
+                        l.zip, l.city, u.first_name, u.last_name, u.telefon FROM
+                        job AS j JOIN location AS l ON j.location_id=l.id_location
+                        JOIN users AS u on j.user_id=u.id`);
+
+        return rows;
+    } catch (err) {
+        console.error('Error in getJobsAll:', err);
+        throw err;
+    } finally {
+        if (conn) {
+            conn.release();
+        }
+    }
+};
+
+export const getJobsByArea = async (area) => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const query = `SELECT j.caption, j.description, j.price, j.date_start, 
+                        j.date_end, j.time_start, j.time_end, l.street, l.numbre, 
+                        l.zip, l.city, u.first_name, u.last_name, u.telefon FROM
+                        job AS j JOIN location AS l ON j.location_id=l.id_location
+                        JOIN users AS u on j.user_id=u.id WHERE l.city = ?`;
+        const rows = await conn.query(query, [area]);
+
+        // console.log(rows);
+        return rows;
+    } catch (err) {
+        console.error('Error in getUsersByArea:', err);
+        throw err;
+    } finally {
+        if (conn) {
+            conn.release();
+        }
+    }
+};
+
 export const getUsersByArea = async (area) => {
     let conn;
     try {
@@ -108,3 +152,5 @@ export const createLocation = async (street, numbre, city, zip) => {
         }
     }
 }
+
+

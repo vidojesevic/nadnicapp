@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createLocation, getUsers, getUsersByArea, getLastLocation } from '../../config/db.js';
+import { createLocation, getUsers, getUsersByArea, getLastLocation, getJobsAll, getJobsByArea } from '../../config/db.js';
 
 const router = new Router();
 
@@ -23,6 +23,34 @@ router.get('/users/area', async (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         // console.log(users)
         res.json(users);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/jobs/area', async (req, res) => {
+    const area = req.query.area;
+
+    try {
+        const jobs = await getJobsByArea(area);
+        res.setHeader('Content-Type', 'application/json');
+        // console.log(users)
+        res.json(jobs);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/jobs/all', async (_req, res) => {
+    try {
+        const job = await getJobsAll();
+        res.setHeader('Content-Type', 'application/json');
+        // console.log(users)
+        res.json(job);
     }
     catch (err) {
         console.log(err);

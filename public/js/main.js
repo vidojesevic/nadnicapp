@@ -11,6 +11,7 @@ $(document).ready(function() {
     loadView("#about", "");
     // ajax calls and swaping content from div
     fetchData(getUsersFromAPI("/api/users/all", "#users"));
+    fetchData(getJobsFromAPI("/api/jobs/all", "#users"));
     searchByArea();
 
     // basic UI
@@ -98,6 +99,49 @@ function getUsersFromAPI(api, id) {
     });
 }
 
+function getJobsFromAPI(api, id) {
+    $.ajax({
+        url: api,
+        type: "GET",
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            $(id).empty();
+            if (data.length === 0) {
+                const city = $("#srcJob").val()
+                $(id).append(`<h3>There is no data for ${city}!</h3>`);
+            }
+
+            data.forEach(job => {
+                const startDate = new Date(job.date_start);
+                const endDate = new Date(job.date_end);
+
+                const userHtml = `
+                <div class="user-card border rounded rounded-2 mb-2">
+                    <h3>${job.caption}</h3>
+                    <p>${job.description}</p>
+                    <p>Date: ${startDate.toISOString().split('T')[0]}-${endDate.toISOString().split('T')[0]}
+                    <span>Time: ${job.time_start} - ${job.time_end}</span></p>
+                    <p>Price: ${job.price} RSD</p>
+                    <form action='' method='POST'>
+                        <input type='submit' id='submitJob' class='btn btn-success' value='Apply' />
+                    </form>
+                    <br/>
+                </div>`;
+
+                $(id).append(userHtml);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr)
+            console.log(status)
+            console.log("Error loading view:", error);
+            $(id).html(`<h3 class="mt-3">Failed to fetch data from API!</h3>`);
+        }
+    });
+}
+
 async function fetchData(func) {
     try {
         await func;
@@ -120,8 +164,8 @@ function searchByArea() {
             alert("You have to enter letters only!")
             return;
         }
-        const url = "/api/users/area?area=" + city;
-        fetchData(getUsersFromAPI(url, "#users"));
+        const url = "/api/jobs/area?area=" + city;
+        fetchData(getJobsFromAPI(url, "#users"));
     });
 }
 
