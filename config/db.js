@@ -34,7 +34,7 @@ export const getUsersByArea = async (area) => {
                     JOIN location AS l ON u.location_id=l.id_location WHERE l.city = ?`;
         const rows = await conn.query(query, [area]);
 
-        console.log(rows);
+        // console.log(rows);
         return rows;
     } catch (err) {
         console.error('Error in getUsersByArea:', err);

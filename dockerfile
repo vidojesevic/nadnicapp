@@ -28,7 +28,7 @@ ENV NODE_ENV=production
 RUN bun test
 
 # Install MySQL client
-RUN apt-get update && apt-get install -y mysql-client
+RUN apt-get update && apt-get install -y mariadb-server
 
 # copy production dependencies and source code into final image
 FROM base AS release

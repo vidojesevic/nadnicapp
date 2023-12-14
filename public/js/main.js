@@ -120,7 +120,7 @@ function searchByArea() {
             alert("You have to enter letters only!")
             return;
         }
-        url = "/api/users/area?area=" + city;
+        const url = "/api/users/area?area=" + city;
         fetchData(getUsersFromAPI(url, "#users"));
     });
 }
