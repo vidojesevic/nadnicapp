@@ -1,20 +1,15 @@
 <div class="card-header border">
     Filters
 </div>
-<ul class="list-group list-group-flush">
-    <li><a class='list-group-item' href='#' data-jobs="">Jobs</a></li>
-    <li><a class='list-group-item' href='#'>Users</a></li>
-    <li><a class='list-group-item' href='#'>Create job</a></li>
+<ul class="list-group list-group-flush" id="filters">
+    <li><a class='list-group-item' href='#' data-url="/api/jobs/create">Create job</a></li>
+    <li><a class='list-group-item' href='#' data-url="/api/jobs/all">Jobs</a></li>
+    <li><a class='list-group-item' href='#' data-url="/api/users/all"=>Users</a></li>
     <li class="dropdown">
         <a class="list-group-item dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Sortiranje po kategoriji
         </a>
         <ul class="dropdown-menu" id="dropp" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
     </li>
 </ul>

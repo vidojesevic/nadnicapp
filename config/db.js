@@ -30,13 +30,31 @@ export const getJobsAll = async () => {
         conn = await pool.getConnection();
         const rows = await conn.query(`SELECT j.caption, j.description, j.price, j.date_start, 
                         j.date_end, j.time_start, j.time_end, l.street, l.numbre, 
-                        l.zip, l.city, u.first_name, u.last_name, u.telefon FROM
+                        l.zip, l.city, u.first_name, u.last_name, u.telefon, c.category FROM
                         job AS j JOIN location AS l ON j.location_id=l.id_location
-                        JOIN users AS u on j.user_id=u.id`);
+                        JOIN users AS u on j.user_id=u.id JOIN job_category AS c 
+                        ON j.category_id=c.category_id ORDER BY j.date_start ASC`);
 
         return rows;
     } catch (err) {
         console.error('Error in getJobsAll:', err);
+        throw err;
+    } finally {
+        if (conn) {
+            conn.release();
+        }
+    }
+};
+
+export const getCategory = async () => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const category = await conn.query("SELECT * FROM job_category;");
+
+        return category;
+    } catch (err) {
+        console.log("Error in getCategory: " + err);
         throw err;
     } finally {
         if (conn) {
@@ -51,15 +69,40 @@ export const getJobsByArea = async (area) => {
         conn = await pool.getConnection();
         const query = `SELECT j.caption, j.description, j.price, j.date_start, 
                         j.date_end, j.time_start, j.time_end, l.street, l.numbre, 
-                        l.zip, l.city, u.first_name, u.last_name, u.telefon FROM
+                        l.zip, l.city, u.first_name, u.last_name, u.telefon, c.category FROM
                         job AS j JOIN location AS l ON j.location_id=l.id_location
-                        JOIN users AS u on j.user_id=u.id WHERE l.city = ?`;
+                        JOIN users AS u on j.user_id=u.id JOIN job_category AS c 
+                        ON j.category_id=c.category_id WHERE l.city = ? ORDER BY j.date_start ASC`;
         const rows = await conn.query(query, [area]);
 
         // console.log(rows);
         return rows;
     } catch (err) {
-        console.error('Error in getUsersByArea:', err);
+        console.error('Error in getJobsByArea:', err);
+        throw err;
+    } finally {
+        if (conn) {
+            conn.release();
+        }
+    }
+};
+
+export const getJobsByCategory = async (category) => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const query = `SELECT j.caption, j.description, j.price, j.date_start, 
+                        j.date_end, j.time_start, j.time_end, l.street, l.numbre, 
+                        l.zip, l.city, u.first_name, u.last_name, u.telefon, c.category FROM
+                        job AS j JOIN location AS l ON j.location_id=l.id_location
+                        JOIN users AS u on j.user_id=u.id JOIN job_category AS c 
+                        ON j.category_id=c.category_id WHERE c.category = ?`;
+        const rows = await conn.query(query, [category]);
+
+        // console.log(rows);
+        return rows;
+    } catch (err) {
+        console.error('Error in getJobsByCategory:', err);
         throw err;
     } finally {
         if (conn) {

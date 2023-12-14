@@ -44,3 +44,9 @@ html {
     box-shadow: -96px 49px 190px -185px rgba(25,135,84,1) inset, -16px 166px 106px -216px rgba(25,135,84,1) inset;
     border-radius: 23%;
 }
+.user-a {
+    text-decoration: none;
+}
+.user-a:hover {
+    color: #000 !important;
+}
